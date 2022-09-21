@@ -10,7 +10,7 @@ CREATE TABLE material (
 	title TEXT,
 	author TEXT,
 	year INTEGER,
-	type TEXT,
+	language TEXT,
 	available BOOLEAN
 );
 
@@ -20,7 +20,7 @@ CREATE TABLE reservations (
 	material_id INTEGER REFERENCES material
 );
 
-CREATE TABLE borrowing_privileges,
+CREATE TABLE borrowing_privileges (
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES users,
 	suspended BOOLEAN
