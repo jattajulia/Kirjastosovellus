@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2> Lisää aineistoa </h2>
+
+<form action="/add" method="post">
+
+<p>Teoksen nimi:<br>
+<input type="text" name="title" minlength="1" maxlength="20"></p>
+<p>Kirjailija:<br>
+<input type="text" name="author" minlength="1" maxlength="20"></p>
+<p>Vuosi:<br>
+<input type="text" name="year" minlength="1" maxlength="20"></p>
+<p>Kieli:<br>
+<input type="text" name="language" minlength="1" maxlength="20"></p>
+
+<input type="submit" value="Lisää teos">
+</form>
+<a href="/"> Etusivulle </a>
+
+{% endblock %}
