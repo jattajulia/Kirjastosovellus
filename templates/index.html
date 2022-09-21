@@ -3,4 +3,19 @@
 
 <h2>Etusivu</h2>
 
+{% if session.user_id %}
+Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>.
+<p>
+<a href="/logout">Kirjaudu ulos</a>
+{% else %}
+Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
+{% endif %}
+
+{% if session.user_role == 2 %}
+<h3>Ylläpitäjän toiminnot</h3>
+<ul>
+<li> <a href="/add">Lisää aineistoa</a>
+<li> Hallitse lainausoikeuksia
+</ul>
+{% endif %}
 {% endblock %}
