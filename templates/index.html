@@ -18,15 +18,17 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 {% endfor %}
 </ul>
 
-{% if session.user_role == 2 %}
-<h3>Asiakkaan toiminnot:</h3>
+
+<h3>Asiakkaan toiminnot</h3>
 <ul>
 <li> <a href="/search">Hae aineistoa</a>
+<li> <a href="/userreservations">Omat varaukset</a>
 </ul>
+{% if session.user_role == 2 %}
 <h3>Ylläpitäjän toiminnot</h3>
 <ul>
 <li> <a href="/add">Lisää aineistoa</a>
-<li> Hallitse lainausoikeuksia
+<li> <a href="/admin">Hallitse lainausoikeuksia</a>
 </ul>
 {% endif %}
 {% endblock %}
