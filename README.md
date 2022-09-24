@@ -4,7 +4,7 @@
 
 - Käyttäjä voi kirjautua sisään ja ulos sekä luoda uuden tunnuksen.
 
-- Käyttäjä pystyy hakea teosta nimen, tekijän, formaatin tai aihepiirin perusteella. Hakutulosta klikkaamalla teoksesta näytetään lisää tietoja (kuten julkaisuvuosi, sivumäärä ja saatavuus)
+- Käyttäjä pystyy hakea teosta nimen, tekijän, kielen tai julkaisuvuoden perusteella. Hakutulosta klikkaamalla teoksesta näytetään lisää tietoja.
 
 - Käyttäjä voi antaa arvion (tähdet ja kommentti) teoksesta ja lukea muiden antamia arvioita.
 
