@@ -10,8 +10,19 @@ Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>.
 {% else %}
 Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 {% endif %}
+<p>
+<h3>Uutuudet</h3>
+<ul>
+{% for material in collection %}
+<li><a href="/material/{{ material.id }}">{{ material.title }}</a>
+{% endfor %}
+</ul>
 
 {% if session.user_role == 2 %}
+<h3>Asiakkaan toiminnot:</h3>
+<ul>
+<li> <a href="/search">Hae aineistoa</a>
+</ul>
 <h3>Ylläpitäjän toiminnot</h3>
 <ul>
 <li> <a href="/add">Lisää aineistoa</a>
