@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2> {{ title }} </h2}
+<h2> {{ title }} </h2>
 
 <ul>
 <li> Tekijä: {{ author }}
@@ -13,6 +13,39 @@
 <p>
 <a href="/reservation/{{ id }}">Varaa teos</a>
 <p>
+
+{% if reviews %}
+<h3>Arviot</h3>
+{% endif %}
+
+<ul>
+{% for entry in reviews %}
+<li> Käyttäjä: {{ entry[0] }} 
+<li> Arvosana: {{ entry[1] }}/5
+<li> Kommentti: "{{ entry[2] }}"
+<p>
+{% endfor %}
+</ul>
+
+{% if session.user_id %}
+<h3>Arvioi teos:</h3>
+<form action="/review" method="post">
+Arvosana (1-5):
+<select name="rating">
+<option value="1">1
+<option value="2">2
+<option value="3">3
+<option value="4">4
+<option value="5">5
+</select>
+<p>
+Arvostelu:<br>
+<textarea name="comment" rows="3" cols="40" maxlength="1000"></textarea>
+<p><input type="submit" value="Lähetä">
+<input type="hidden" name="material_id" value="{{ id }}">
+</form>
+{% endif %}
+
 <a href="/">Etusivulle</a>
 
 {% endblock %}
