@@ -71,8 +71,12 @@ def add_material():
 @app.route("/reservation/<int:material_id>", methods=["get"])
 def make_reservation(material_id):
 	user_id = users.user_id()
-	reservations.make_reservation(material_id, user_id)
-	return redirect("/material/"+str(material_id))
+	if users.is_suspended(user_id):
+		return render_template("error.html", message="Et voi varata teosta, koska sinulla ei ole lainausoikeuksia")
+	else:
+		reservations.make_reservation(material_id, user_id)
+		reservation_title = collection.get_material_title(material_id)[1]
+		return render_template("reservation.html", title = reservation_title)
 	
 
 
@@ -85,14 +89,51 @@ def search():
 @app.route("/result")
 def result():
 	query = request.args["query"]
-	material_id = collection.get_material(query)
-	if material_id is None:
+	material_list = collection.get_material(query)
+	if material_list is None:
 		return render_template("error.html", message="Haullasi ei löytynyt aineistoa")
-	return redirect("/material/"+str(material_id))
+	return render_template("result.html", search_results = material_list)
 
 @app.route("/material/<int:material_id>")
 def show_material(material_id):
 	info = collection.get_material_info(material_id)
 	reservation_count = reservations.get_reservations(material_id)
-	return render_template("material.html", id=material_id, title=info[0], author=info[1], year=info[2], language=info[3], reservations=reservation_count)
+	reviews = collection.get_reviews(material_id)
+	return render_template("material.html", id=material_id, title=info[0], author=info[1], year=info[2], language=info[3], reservations=reservation_count, reviews=reviews)
+
+@app.route("/userreservations")
+def myreservations():
+	user_id = users.user_id()
+	reservation_list = reservations.get_user_reservations(user_id)
+	return render_template("user_reservations.html", lista = reservation_list)
+
+
+
+@app.route("/review", methods=["post"])
+def review():
+	users.require_role(1)
+	material_id = request.form["material_id"]
+	rating = int(request.form["rating"])
+	if rating < 1 or rating > 5:
+        	return render_template("error.html", message="Virheellinen arvosana")
+	comment = request.form["comment"]
+	if len(comment) > 1000:
+		return render_template("error.html", message="Kommentti on liian pitkä")
+	if comment == "":
+		comment = "-"
+	collection.add_review(material_id, users.user_id(), rating, comment)
+	return redirect("/material/"+str(material_id))
+
+@app.route("/admin", methods=["get", "post"])
+def control_privileges():
+	if request.method == "GET":
+		return render_template("borrowing_privileges.html")
+	if request.method == "POST":
+		username = request.form["name"]
+		if users.disable_borrowing(username):
+			return redirect("/")
+		else:
+			return render_template("error.html", message="Käyttäjänimeä ei löydy")
+	
+
 
