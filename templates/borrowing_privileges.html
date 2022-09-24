@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2> Hallinnoi lainausoikeuksia </h2>
+<form action="/admin" method="post">
+<p>Käyttäjätunnus:<br>
+<input type="text" name="name"></p>
+<input type="submit" value="Poista lainausoikeus">
+</form>
+<a href="/"> Etusivulle </a>
+
+{% endblock %}
+
