@@ -35,8 +35,28 @@ def register(name, password, role):
 def user_id():
 	return session.get("user_id", 0)
 
+def search_id(name):
+	sql = """SELECT id FROM users WHERE name=:name"""
+	return db.session.execute(sql, {"name":name}).fetchone()[0]
 def require_role(role):
 	if role > session.get("user_role", 0):
 		abort(403)
 
+def disable_borrowing(name):
+	user_id = search_id(name)
+	if user_id is None:
+		return False
+	sql = """INSERT INTO borrowing_privileges (user_id, suspended) VALUES (:user_id, TRUE)"""
+	db.session.execute(sql, {"user_id":user_id})
+	db.session.commit()
+	return True
+def is_suspended(user_id):
+	sql = """SELECT b.suspended FROM borrowing_privileges b WHERE b.user_id=:user_id"""
+	suspension = db.session.execute(sql, {"user_id":user_id}).fetchone()[0]
+	if suspension is None:
+		return False
+	if suspension:
+		return True
+	else:
+		return False 
 
