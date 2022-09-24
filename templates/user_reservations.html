@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h3>Olet varannut seuraavat teokset: </h3>
+<p>
+<ul>
+{% for item in lista %}
+<li><a href="/material/{{ item.id }}"> {{ item.title }}</a>
+{% endfor %}
+</ul>
+<p>
+<a href="/">Etusivulle</a>
+{% endblock %}
+
