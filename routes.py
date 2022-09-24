@@ -107,8 +107,6 @@ def myreservations():
 	reservation_list = reservations.get_user_reservations(user_id)
 	return render_template("user_reservations.html", lista = reservation_list)
 
-
-
 @app.route("/review", methods=["post"])
 def review():
 	users.require_role(1)
@@ -131,7 +129,7 @@ def control_privileges():
 	if request.method == "POST":
 		username = request.form["name"]
 		if users.disable_borrowing(username):
-			return redirect("/")
+			return render_template("verification.html", message="Käyttäjän lainausoikeus poistettiin")
 		else:
 			return render_template("error.html", message="Käyttäjänimeä ei löydy")
 	
