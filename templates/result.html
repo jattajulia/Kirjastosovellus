@@ -2,9 +2,11 @@
 {% block content %}
 Haullasi löytyi seuraavat tulokset:
 <p>
-
-{{ search_results }}
-
+<ul>
+{% for i in search_results %}
+<li><a href="/material/{{ i.id }}"> {{ i.title }} </a>
+{% endfor %}
+</ul>
 <p>
 
 <a href="/"> Etusivulle </a>
