@@ -10,9 +10,11 @@
 <li> Varauksia: {{ reservations }} kpl
 </ul>
 
+{% if session.user_id %}
 <p>
 <a href="/reservation/{{ id }}">Varaa teos</a>
 <p>
+{% endif %}
 
 {% if reviews %}
 <h3>Arviot</h3>

@@ -6,9 +6,9 @@
 <form action="/add" method="post">
 
 <p>Teoksen nimi:<br>
-<input type="text" name="title" minlength="1" maxlength="20"></p>
+<input type="text" name="title" minlength="1" maxlength="50"></p>
 <p>Kirjailija:<br>
-<input type="text" name="author" minlength="1" maxlength="20"></p>
+<input type="text" name="author" minlength="1" maxlength="30"></p>
 <p>Vuosi:<br>
 <input type="text" name="year" minlength="1" maxlength="20"></p>
 <p>Kieli:<br>
@@ -16,6 +16,7 @@
 
 <input type="submit" value="Lisää teos">
 </form>
+<p>
 <a href="/"> Etusivulle </a>
 
 {% endblock %}
