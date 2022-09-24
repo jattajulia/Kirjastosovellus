@@ -50,12 +50,13 @@ def disable_borrowing(name):
 	db.session.execute(sql, {"user_id":user_id})
 	db.session.commit()
 	return True
+
 def is_suspended(user_id):
 	sql = """SELECT b.suspended FROM borrowing_privileges b WHERE b.user_id=:user_id"""
-	suspension = db.session.execute(sql, {"user_id":user_id}).fetchone()[0]
+	suspension = db.session.execute(sql, {"user_id":user_id}).fetchone()
 	if suspension is None:
 		return False
-	if suspension:
+	if suspension[0]:
 		return True
 	else:
 		return False 
