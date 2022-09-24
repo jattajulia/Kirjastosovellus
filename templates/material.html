@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2> {{ title }} </h2}
+
+<ul>
+<li> Tekijä: {{ author }}
+<li> Julkaisuvuosi: {{ year }}
+<li> Kieli: {{ language }}
+<li> Varauksia: {{ reservations }} kpl
+</ul>
+
+<p>
+<a href="/reservation/{{ id }}">Varaa teos</a>
+<p>
+<a href="/">Etusivulle</a>
+
+{% endblock %}
+
