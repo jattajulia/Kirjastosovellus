@@ -2,11 +2,13 @@ from app import app
 from flask import render_template, request, redirect
 import users
 import collection
+import reservations
+from db import db
 
 
 @app.route("/")
 def index():
-	return render_template("index.html")
+	return render_template("index.html", collection=collection.get_new_material())
 
 @app.route("/login", methods=["get", "post"])
 def login():
@@ -19,6 +21,7 @@ def login():
 			return redirect("/")
 		else:
 			return render_template("error.html", message="Väärä käyttäjätunnus tai salasana")
+
 
 @app.route("/register", methods=["get", "post"])
 def register():
@@ -65,4 +68,31 @@ def add_material():
 		collection.add_material(title, author, year, language)
 		return redirect("/")
 
+@app.route("/reservation/<int:material_id>", methods=["get"])
+def make_reservation(material_id):
+	user_id = users.user_id()
+	reservations.make_reservation(material_id, user_id)
+	return redirect("/material/"+str(material_id))
+	
+
+
+@app.route("/search", methods=["get"])
+def search():
+	if request.method == "GET":
+		return render_template("search.html")
+		
+
+@app.route("/result")
+def result():
+	query = request.args["query"]
+	material_id = collection.get_material(query)
+	if material_id is None:
+		return render_template("error.html", message="Haullasi ei löytynyt aineistoa")
+	return redirect("/material/"+str(material_id))
+
+@app.route("/material/<int:material_id>")
+def show_material(material_id):
+	info = collection.get_material_info(material_id)
+	reservation_count = reservations.get_reservations(material_id)
+	return render_template("material.html", id=material_id, title=info[0], author=info[1], year=info[2], language=info[3], reservations=reservation_count)
 
