@@ -31,7 +31,7 @@ def get_material_availability(material_id):
 	return db.session.execute(sql, {"material_id": material_id}).fetchone()[0]
 
 def get_material(query):
-	sql = "SELECT id, title FROM material WHERE title LIKE :query OR language LIKE :query OR author LIKE :query OR year LIKE :query"
+	sql = "SELECT id, title FROM material WHERE title LIKE :query OR language LIKE :query OR author LIKE :query"
 	result = db.session.execute(sql, {"query":"%"+query+"%"})
 	result_list = db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
 	if len(result_list) == 0:
