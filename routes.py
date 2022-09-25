@@ -75,6 +75,7 @@ def make_reservation(material_id):
 		return render_template("error.html", message="Et voi varata teosta, koska sinulla ei ole lainausoikeuksia")
 	else:
 		reservations.make_reservation(material_id, user_id)
+		collection.change_availability(material_id)
 		reservation_title = collection.get_material_title(material_id)[1]
 		return render_template("reservation.html", title = reservation_title)
 	
@@ -97,9 +98,13 @@ def result():
 @app.route("/material/<int:material_id>")
 def show_material(material_id):
 	info = collection.get_material_info(material_id)
+	if collection.get_material_availability(material_id):
+		available = "Kyllä"
+	else:
+		available = "Ei"
 	reservation_count = reservations.get_reservations(material_id)
 	reviews = collection.get_reviews(material_id)
-	return render_template("material.html", id=material_id, title=info[0], author=info[1], year=info[2], language=info[3], reservations=reservation_count, reviews=reviews)
+	return render_template("material.html", id=material_id, title=info[0], author=info[1], year=info[2], language=info[3], reservations=reservation_count, available=available, reviews=reviews)
 
 @app.route("/userreservations")
 def myreservations():
