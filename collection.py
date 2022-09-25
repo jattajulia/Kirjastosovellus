@@ -17,9 +17,18 @@ def get_all_material():
 	sql = "SELECT id, title FROM material ORDER BY title"
 	return db.session.execute(sql).fetchall()
 
+def change_availability(material_id):
+	sql = """UPDATE material SET available=FALSE WHERE id=:material_id"""
+	db.session.execute(sql, {"material_id": material_id})
+	db.session.commit()
+
 def get_new_material():
 	sql = "SELECT id, title FROM material ORDER BY id DESC"
 	return db.session.execute(sql).fetchmany(5)
+
+def get_material_availability(material_id):
+	sql = """SELECT m.available FROM material m WHERE m.id=:material_id"""
+	return db.session.execute(sql, {"material_id": material_id}).fetchone()[0]
 
 def get_material(query):
 	sql = "SELECT id, title FROM material WHERE title LIKE :query OR language LIKE :query OR author LIKE :query"
