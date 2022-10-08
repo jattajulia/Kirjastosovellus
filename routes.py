@@ -63,9 +63,12 @@ def add_material():
 	if request.method == "POST":
 		title = request.form["title"]
 		author = request.form["author"]
-		year = int(request.form["year"])
+		try:
+			year = int(request.form["year"])
+		except:
+			return render_template("error.html", message="Vuosiluku on annettava numeroina")
 		language = request.form["language"]
-		if len(title) < 1 or len(author) < 1 or len(year) < 1 or len(year) < 1:
+		if len(title) < 1 or len(author) < 1 or len(language) < 1:
 			return render_template("error.html", message="Et voi jättää kenttiä tyhjiksi")
 		collection.add_material(title, author, year, language)
 		return redirect("/")
