@@ -21,7 +21,7 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a> tai <a href=
 <h3>Varatuimmat</h3>
 <ol>
 {% for material in topreserved %}
-<li><a href="/material/{{ material[0] }}">{{ material[1] }}</a>, Varauksia: {{ material[2] }} kpl
+<li>{{ material[1] }}: <a href="/material/{{ material[0] }}">{{ material[2] }}</a> {{ material[3] }}
 {% endfor %}
 </ol>
 
