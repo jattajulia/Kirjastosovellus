@@ -19,6 +19,6 @@ Sovelluksella on seuraavat ominaisuudet:
 
 - Ylläpitäjä voi ottaa pois käyttäjän lainausoikeuden, mikä estää myös teoksen varaamisen.
 
-Tällä hetkellä sovellukseen on toteutettu rekisteröityminen ja sisäänkirjautuminen, haku- ja arvostelutoiminto, varausten tekeminen ja omien varauksen tarkastelu sekä ylläpitäjän lainausoikeuden, kommenttien ja aineiston poistamisen mahdollistavat toiminnot. Tarkoituksena on vielä parantaa hakutoimintoa, sillä tällä hetkellä hakusanoina toimivat vain teoksen nimi, kirjailija tai kieli yksinään (esim. hakusanat 'Tove Jansson' tai 'suomi'). Lisäksi sovelluksen ulkoasua tullaan vielä kehittämään.
+Tällä hetkellä sovellukseen on toteutettu rekisteröityminen ja sisäänkirjautuminen, haku- ja arvostelutoiminto, varausten tekeminen ja omien varauksen tarkastelu sekä ylläpitäjän aineiston lisäämisen ja lainausoikeuden, kommenttien ja aineiston poistamisen mahdollistavat toiminnot. Tarkoituksena on vielä parantaa hakutoimintoa, sillä tällä hetkellä hakusanoina toimivat vain teoksen nimi, kirjailija tai kieli yksinään (esim. hakusanat 'Tove Jansson' tai 'suomi'). Lisäksi sovelluksen ulkoasua tullaan vielä kehittämään.
 
 Sovelluksen Heroku-osoite: https://fierce-everglades-26533.herokuapp.com/
