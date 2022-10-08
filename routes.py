@@ -73,11 +73,14 @@ def make_reservation(material_id):
 	user_id = users.user_id()
 	if users.is_suspended(user_id):
 		return render_template("error.html", message="Et voi varata teosta, koska sinulla ei ole lainausoikeuksia")
-	else:
-		reservations.make_reservation(material_id, user_id)
-		collection.change_availability(material_id)
-		reservation_title = collection.get_material_title(material_id)[1]
-		return render_template("reservation.html", title = reservation_title)
+	reservation_list = reservations.get_user_reservations(user_id)
+	for i in reservation_list:
+		if i[0] == material_id:
+			return 	render_template("error.html", message="Olet jo varannut tämän teoksen")
+	reservations.make_reservation(material_id, user_id)
+	collection.change_availability(material_id)
+	reservation_title = collection.get_material_title(material_id)[1]
+	return render_template("reservation.html", title = reservation_title)
 	
 
 
