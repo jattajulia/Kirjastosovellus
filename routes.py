@@ -3,6 +3,7 @@ from flask import render_template, request, redirect
 import users
 import collection
 import reservations
+import reviews
 from db import db
 
 
@@ -107,8 +108,8 @@ def show_material(material_id):
 	else:
 		available = "Ei"
 	reservation_count = reservations.get_reservations(material_id)
-	reviews = collection.get_reviews(material_id)
-	return render_template("material.html", id=material_id, title=info[0], author=info[1], year=info[2], language=info[3], reservations=reservation_count, available=available, reviews=reviews)
+	review_list = reviews.get_reviews(material_id)
+	return render_template("material.html", id=material_id, title=info[0], author=info[1], year=info[2], language=info[3], reservations=reservation_count, available=available, review_list=review_list)
 
 @app.route("/userreservations")
 def myreservations():
@@ -128,8 +129,13 @@ def review():
 		return render_template("error.html", message="Kommentti on liian pitkä")
 	if comment == "":
 		comment = "-"
-	collection.add_review(material_id, users.user_id(), rating, comment)
+	reviews.add_review(material_id, users.user_id(), rating, comment)
 	return redirect("/material/"+str(material_id))
+
+@app.route('/delete_review/<review_id>', methods=['POST'])
+def delete_review(review_id):
+    reviews.delete_review(review_id)
+    return render_template("verification.html", message="Kommentti poistettiin")
 
 @app.route("/admin", methods=["get", "post"])
 def control_privileges():
