@@ -22,10 +22,15 @@
 {% endif %}
 
 <ul>
-{% for entry in reviews %}
-<li> Käyttäjä: {{ entry[0] }} 
-<li> Arvosana: {{ entry[1] }}/5
-<li> Kommentti: "{{ entry[2] }}"
+{% for entry in review_list %}
+<li> Käyttäjä: {{ entry[1] }} 
+<li> Arvosana: {{ entry[2] }}/5
+<li> Kommentti: "{{ entry[3] }}"
+{% if session.user_role == 2 %}
+<form action="/delete_review/{{ entry[0] }}" method=post>
+        <input type=submit value="Poista kommentti">
+</form>
+{% endif %}
 <p>
 {% endfor %}
 </ul>
