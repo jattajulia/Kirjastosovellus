@@ -8,7 +8,7 @@ from db import db
 
 @app.route("/")
 def index():
-	return render_template("index.html", collection=collection.get_new_material())
+	return render_template("index.html", collection=collection.get_new_material(), topreserved=reservations.get_most_reserved())
 
 @app.route("/login", methods=["get", "post"])
 def login():
