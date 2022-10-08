@@ -17,7 +17,7 @@ CREATE TABLE material (
 CREATE TABLE reservations (
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES users,
-	material_id INTEGER REFERENCES material
+	material_id INTEGER REFERENCES material ON DELETE CASCADE
 );
 
 CREATE TABLE borrowing_privileges (
@@ -29,7 +29,7 @@ CREATE TABLE borrowing_privileges (
 CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES users,
-	material_id INTEGER REFERENCES material,
+	material_id INTEGER REFERENCES material ON DELETE CASCADE,
 	rating INTEGER,
 	comment TEXT
 );
