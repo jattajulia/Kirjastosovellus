@@ -132,10 +132,16 @@ def review():
 	reviews.add_review(material_id, users.user_id(), rating, comment)
 	return redirect("/material/"+str(material_id))
 
-@app.route('/delete_review/<review_id>', methods=['POST'])
+@app.route("/delete_review/<review_id>", methods=['POST'])
 def delete_review(review_id):
-    reviews.delete_review(review_id)
-    return render_template("verification.html", message="Kommentti poistettiin")
+	reviews.delete_review(review_id)
+	return render_template("verification.html", message="Kommentti poistettiin")
+
+@app.route("/delete_material/<material_id>", methods=['POST'])
+def delete_material(material_id):
+	collection.delete_material(material_id)
+	return render_template("verification.html", message="Aineisto poistettiin")
+	
 
 @app.route("/admin", methods=["get", "post"])
 def control_privileges():
