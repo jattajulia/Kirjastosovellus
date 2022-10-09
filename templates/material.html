@@ -16,7 +16,6 @@
 <form action="/reservation/{{ id }}" method=get>
 	<input type=submit value="Varaa teos">
 </form>
-<p>
 {% endif %}
 {% if session.user_role == 2 %}
 <form action="/delete_material/{{ id }}" method=post>
@@ -24,15 +23,16 @@
 </form>
 {% endif %}
 
-{% if reviews %}
-<h3>Arviot</h3>
-{% endif %}
+<p> 
 
-<ul>
+
+<h3>Arviot ({{ review_count }})</h3>
+<p>
+{% if review_list %}
 {% for entry in review_list %}
-<li> Käyttäjä: {{ entry[1] }} 
-<li> Arvosana: {{ entry[2] }}/5
-<li> Kommentti: "{{ entry[3] }}"
+Käyttäjä: <b> {{ entry[1] }} </b> | Arvosana: {{ entry[2] }}/5
+<hr>
+"{{ entry[3] }}" <p>
 {% if session.user_role == 2 %}
 <form action="/delete_review/{{ entry[0] }}" method=post>
         <input type=submit value="Poista kommentti">
@@ -40,7 +40,9 @@
 {% endif %}
 <p>
 {% endfor %}
-</ul>
+{% else %}
+Tällä teoksella ei ole vielä arvosteluja.
+{% endif %}
 
 {% if session.user_id %}
 <h3>Arvioi teos:</h3>
