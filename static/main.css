@@ -9,6 +9,11 @@ table {
 	width: 80%;
 }
 
+.submit_button { 
+	float: left; 
+	padding-right: 10px;
+}
+
 h1 {
 	background: thistle;
 	font-weight: bold;
