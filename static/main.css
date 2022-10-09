@@ -1,6 +1,6 @@
 body {
 	margin: auto;
-	max-width: 45em;
+	max-width: 50em;
 	font-family: 'Helvetica', 'Arial', sans-serif;
 	background-color: white;
 }
@@ -28,20 +28,24 @@ a {
 
 
 nav li {
-	display: inline-block;
-	padding: .5em;
-	background: thistle;
+	float: left;
 }
 
 nav ul {
 	padding: 0;
+	list-style-type: none;
+	overflow: hidden;
+	background-color: thistle;
 }
 
 nav li a {
 	text-decoration: none;
 	color: #000;
+	display: block;
+	padding: 8px 14px;
+	background-color: thistle; 
 }
 
-nav li:hover {
+nav li a:hover {
 	background-color: rgb(175, 122, 175);
 }
