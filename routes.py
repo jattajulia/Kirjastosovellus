@@ -117,7 +117,7 @@ def show_material(material_id):
 	else:
 		review_count = 0
 	return render_template("material.html", id=material_id, title=info[0], author=info[1], year=info[2], language=info[3],
-			       reservations=reservation_count, available=available, review_list=review_list, review_count=review_count)
+	       reservations=reservation_count, available=available, review_list=review_list, review_count=review_count)
 
 @app.route("/userreservations")
 def myreservations():
@@ -150,7 +150,6 @@ def delete_material(material_id):
 	collection.delete_material(material_id)
 	return render_template("verification.html", message="Aineisto poistettiin")
 	
-
 @app.route("/admin", methods=["get", "post"])
 def control_privileges():
 	if request.method == "GET":
@@ -162,5 +161,4 @@ def control_privileges():
 		else:
 			return render_template("error.html", message="Käyttäjänimeä ei löydy")
 	
-
 
