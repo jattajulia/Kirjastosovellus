@@ -3,42 +3,38 @@
 
 <h2> {{ title }} </h2>
 
-<ul>
-<li> Tekijä: {{ author }}
-<li> Julkaisuvuosi: {{ year }}
-<li> Kieli: {{ language }}
-<li> Varauksia: {{ reservations }} kpl
-<li> Saatavilla: {{ available }}
-</ul>
 
+Tekijä: {{ author }} <br>
+Julkaisuvuosi: {{ year }} <br>
+Kieli: {{ language }} <br>
+Varauksia: {{ reservations }} kpl <br>
+Saatavilla: {{ available }} <br>
+<br>
 {% if session.user_id %}
-<p>
-<form action="/reservation/{{ id }}" method=get>
+<form action="/reservation/{{ id }}" method=get class="submit_button">
 	<input type=submit value="Varaa teos">
 </form>
-{% endif %}
 {% if session.user_role == 2 %}
-<form action="/delete_material/{{ id }}" method=post>
+<form action="/delete_material/{{ id }}" method=post class="submit_button">
         <input type=submit value="Poista aineisto">
 </form>
 {% endif %}
-
-<p> 
-
-
+{% endif %}
+<br>
 <h3>Arviot ({{ review_count }})</h3>
 <p>
 {% if review_list %}
 {% for entry in review_list %}
 Käyttäjä: <b> {{ entry[1] }} </b> | Arvosana: {{ entry[2] }}/5
 <hr>
-"{{ entry[3] }}" <p>
+<p>
+"{{ entry[3] }}" <br>
 {% if session.user_role == 2 %}
 <form action="/delete_review/{{ entry[0] }}" method=post>
         <input type=submit value="Poista kommentti">
 </form>
 {% endif %}
-<p>
+</p>
 {% endfor %}
 {% else %}
 Tällä teoksella ei ole vielä arvosteluja.
