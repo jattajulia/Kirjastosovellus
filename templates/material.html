@@ -19,8 +19,8 @@ Saatavilla: {{ available }} <br>
         <input type=submit value="Poista aineisto">
 </form>
 {% endif %}
-{% endif %}
 <br>
+{% endif %}
 <h3>Arviot ({{ review_count }})</h3>
 <p>
 {% if review_list %}
@@ -39,7 +39,7 @@ Käyttäjä: <b> {{ entry[1] }} </b> | Arvosana: {{ entry[2] }}/5
 {% else %}
 Tällä teoksella ei ole vielä arvosteluja.
 {% endif %}
-
+</p>
 {% if session.user_id %}
 <h3>Arvioi teos:</h3>
 <form action="/review" method="post">
