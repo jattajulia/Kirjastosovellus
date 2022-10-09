@@ -116,7 +116,8 @@ def show_material(material_id):
 		review_count = len(review_list)
 	else:
 		review_count = 0
-	return render_template("material.html", id=material_id, title=info[0], author=info[1], year=info[2], language=info[3], reservations=reservation_count, available=available, review_list=review_list, review_count=review_count)
+	return render_template("material.html", id=material_id, title=info[0], author=info[1], year=info[2], language=info[3],
+			       reservations=reservation_count, available=available, review_list=review_list, review_count=review_count)
 
 @app.route("/userreservations")
 def myreservations():
