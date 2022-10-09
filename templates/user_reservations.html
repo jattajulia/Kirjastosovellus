@@ -1,14 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
 <h2>Omat varaukseni</h2>
-<p>
 <h3>Olet varannut seuraavat teokset: </h3>
-<p>
+{% if lista %}
 <ul>
 {% for item in lista %}
 <li><a href="/material/{{ item.id }}"> {{ item.title }}</a>
 {% endfor %}
 </ul>
-<p>
+{% else %}
+Sinulla ei ole varauksia.
+{% endif %}
 {% endblock %}
 
