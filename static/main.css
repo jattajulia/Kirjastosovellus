@@ -14,7 +14,34 @@ h1 {
 	font-weight: bold;
 	padding: 2em 1em;
 	font-size: 2em;
+	border-radius: .5em;
+}
+
+h1 a {
+	text-decoration: none;
+	color: #000;
+}
+
+a {
+	color: #000;
 }
 
 
+nav li {
+	display: inline-block;
+	padding: .5em;
+	background: thistle;
+}
 
+nav ul {
+	padding: 0;
+}
+
+nav li a {
+	text-decoration: none;
+	color: #000;
+}
+
+nav li:hover {
+	background-color: rgb(175, 122, 175);
+}

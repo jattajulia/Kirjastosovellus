@@ -1,14 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Etusivu</h2>
-
 {% if session.user_id %}
 Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>.
-<p>
-<a href="/logout">Kirjaudu ulos</a>
-{% else %}
-Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a> tai <a href="/register">Rekisteröidy käyttäjäksi</a>.
 {% endif %}
 <p>
 <h3>Uutuudet</h3>
@@ -25,18 +19,4 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a> tai <a href=
 {% endfor %}
 </ol>
 
-{% if session.user_id %}
-<h3>Asiakkaan toiminnot</h3>
-<ul>
-<li> <a href="/search">Hae aineistoa</a>
-<li> <a href="/userreservations">Omat varaukset</a>
-</ul>
-{% endif %}
-{% if session.user_role == 2 %}
-<h3>Ylläpitäjän toiminnot</h3>
-<ul>
-<li> <a href="/add">Lisää aineistoa</a>
-<li> <a href="/admin">Hallitse lainausoikeuksia</a>
-</ul>
-{% endif %}
 {% endblock %}
