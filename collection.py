@@ -35,12 +35,29 @@ def get_material_availability(material_id):
 	sql = """SELECT m.available FROM material m WHERE m.id=:material_id"""
 	return db.session.execute(sql, {"material_id": material_id}).fetchone()[0]
 
-def get_material(query):
-	sql = """SELECT id, title FROM material WHERE title LIKE :query OR language LIKE :query OR author LIKE :query"""
+def get_material_by_title(query):
+	sql = """SELECT id, title FROM material WHERE title LIKE :query"""
 	result = db.session.execute(sql, {"query":"%"+query+"%"})
 	result_list = db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
 	if len(result_list) == 0:
 		return None
 	return db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
+
+def get_material_by_author(query):
+	sql = """SELECT id, title FROM material WHERE author LIKE :query"""
+	result = db.session.execute(sql, {"query":"%"+query+"%"})
+	result_list = db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
+	if len(result_list) == 0:
+		return None
+	return db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
+
+def get_material_by_language(query):
+	sql = """SELECT id, title FROM material WHERE language LIKE :query"""
+	result = db.session.execute(sql, {"query":"%"+query+"%"})
+	result_list = db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
+	if len(result_list) == 0:
+		return None
+	return db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
+
 
 
