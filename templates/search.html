@@ -3,7 +3,13 @@
 
 <h2>Hae aineistoa</h2>
 <form action="/result" method "GET">
-Hakusana: <input type = "text" placeholder="Teos, tekijä, kieli..." name="query">
+
+<select name="field">
+<option value=1> otsikko
+<option value=2> tekijä
+<option value=3> kieli
+</select>
+<input type = "text" name="query">
 <p>
 <input type="submit" value="Lähetä">
 
