@@ -23,7 +23,6 @@ def login():
 		else:
 			return render_template("error.html", message="Väärä käyttäjätunnus tai salasana")
 
-
 @app.route("/register", methods=["get", "post"])
 def register():
 	if request.method == "GET":
@@ -51,7 +50,6 @@ def register():
 def logout():
 	users.logout()
 	return redirect("/")
-
 
 @app.route("/add", methods=["get", "post"])
 def add_material():
@@ -87,21 +85,30 @@ def make_reservation(material_id):
 	reservation_title = collection.get_material_title(material_id)[1]
 	return render_template("reservation.html", title = reservation_title)
 	
-
-
 @app.route("/search", methods=["get"])
 def search():
 	if request.method == "GET":
 		return render_template("search.html")
 		
-
 @app.route("/result")
 def result():
 	query = request.args["query"]
-	material_list = collection.get_material(query)
-	if material_list is None:
-		return render_template("error.html", message="Haullasi ei löytynyt aineistoa")
-	return render_template("result.html", search_results = material_list)
+	field = request.args["field"]
+	if field == "1":
+		material_list = collection.get_material_by_title(query)
+		if material_list is None:
+			return render_template("error.html", message="Haullasi ei löytynyt aineistoa")
+		return render_template("result.html", search_results = material_list)
+	if field == "2":
+		material_list = collection.get_material_by_author(query)
+		if material_list is None:
+			return render_template("error.html", message="Haullasi ei löytynyt aineistoa")
+		return render_template("result.html", search_results = material_list)
+	if field == "3":
+		material_list = collection.get_material_by_language(query)
+		if material_list is None:
+			return render_template("error.html", message="Haullasi ei löytynyt aineistoa")
+		return render_template("result.html", search_results = material_list)
 
 @app.route("/material/<int:material_id>")
 def show_material(material_id):
