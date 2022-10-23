@@ -68,7 +68,7 @@ def add_material():
 		except:
 			return render_template("error.html", message="Vuosiluku on annettava numeroina")
 		collection.add_material(title, author, year, language)
-		return redirect("/")
+		return render_template("verification.html", message="Aineiston lisäys onnistui")
 
 @app.route("/reservation/<int:material_id>", methods=["get"])
 def make_reservation(material_id):
