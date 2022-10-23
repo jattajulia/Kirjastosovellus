@@ -11,12 +11,14 @@ Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>.
 <li><a href="/material/{{ material.id }}">{{ material.title }}</a>
 {% endfor %}
 </ul>
-
+</p>
+<p>
 <h3>Varatuimmat</h3>
 <ol>
 {% for material in topreserved %}
 <li>{{ material[1] }}: <a href="/material/{{ material[0] }}">{{ material[2] }}</a> {{ material[3] }}
 {% endfor %}
 </ol>
+</p>
 
 {% endblock %}
