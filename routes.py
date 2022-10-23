@@ -38,7 +38,6 @@ def register():
 			return render_template("error.html", message="Salasanat eroavat")
 		if password1 == "":
 			return render_template("error.html", message="Salasana ei voi olla tyhjä")
-		
 		role = request.form["role"]
 		if role not in ("1", "2"):
 			return render_template("error.html", message="Tuntematon käyttäjärooli")
@@ -61,13 +60,13 @@ def add_material():
 	if request.method == "POST":
 		title = request.form["title"]
 		author = request.form["author"]
+		language = request.form["language"]
+		if len(title) < 1 or len(author) < 1 or len(language) < 1:
+			return render_template("error.html", message="Et voi jättää kenttiä tyhjiksi")
 		try:
 			year = int(request.form["year"])
 		except:
 			return render_template("error.html", message="Vuosiluku on annettava numeroina")
-		language = request.form["language"]
-		if len(title) < 1 or len(author) < 1 or len(language) < 1:
-			return render_template("error.html", message="Et voi jättää kenttiä tyhjiksi")
 		collection.add_material(title, author, year, language)
 		return redirect("/")
 
@@ -147,7 +146,7 @@ def review():
 	reviews.add_review(material_id, users.user_id(), rating, comment)
 	return redirect("/material/"+str(material_id))
 
-@app.route("/delete_review/<review_id>", methods=['POST'])
+@app.route("/delete_review/<review_id>", methods=["post"])
 def delete_review(review_id):
 	reviews.delete_review(review_id)
 	return render_template("verification.html", message="Kommentti poistettiin")
@@ -163,6 +162,8 @@ def control_privileges():
 		return render_template("borrowing_privileges.html")
 	if request.method == "POST":
 		username = request.form["name"]
+		if len(username) < 1:
+			return render_template("error.html", message="Et voi jättää kenttää tyhjäksi")
 		if users.disable_borrowing(username):
 			return render_template("verification.html", message="Käyttäjän lainausoikeus poistettiin")
 		else:
